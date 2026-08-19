@@ -3,6 +3,7 @@ streamlit>=1.38.0
 torch>=2.3.0
 torchvision>=0.18.0
 transformers>=4.40.0
+timm>=1.0.7
 safetensors>=0.4.0
 accelerate>=0.30.0
 huggingface-hub>=0.24.0

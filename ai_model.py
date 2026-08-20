@@ -271,7 +271,7 @@ def predict_image(models: List[Dict], image: Image.Image) -> Dict:
 # See app.py update below.
 
 def predict_ensemble(models: List[Dict], image: Image.Image) -> Dict:
-    """Runs Ensemble + TTA. Returns raw probs."""
+    """Runs Ensemble + TTA. Returns raw probs with keys expected by fusion."""
     if not models: raise RuntimeError("No models loaded")
     
     ensemble_ai = 0.0; ensemble_real = 0.0; total_w = 0.0
@@ -287,7 +287,10 @@ def predict_ensemble(models: List[Dict], image: Image.Image) -> Dict:
     if total_w == 0: raise RuntimeError("All models failed")
     ai_p = ensemble_ai / total_w
     real_p = ensemble_real / total_w
-    return {"ai_prob": ai_p, "real_prob": real_p}
+    
+    # FIX: Keys must match apply_exif_fusion expectation
+    return {"raw_ai_prob": ai_p, "raw_real_prob": real_p}
+
 
 
 # ---------------------------------------------------------------------------
